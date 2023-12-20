@@ -1,7 +1,21 @@
 import React from 'react'
-import styles from './Register.module.css'
-import { useFormik } from 'formik'
+import styles from './Register.module.css';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+
+
 export default function Register() {
+
+
+
+    const validationSchema = Yup.object({
+        name: Yup.string().max(15, 'name is to long'),
+        email: Yup.string().email('email not valid'),
+        password: Yup.string().matches(/^[A-Z][a-z0-9]{5,8}$/, 'password not match '),
+        rePassword: Yup.string().oneOf([Yup.ref('password')],'password not match password '),
+        phone: Yup.string().matches(/^01[0125][0-9]{8}$/, 'Please Enter Egyptian Number ')
+    }).required()
 
 
     const formik = useFormik({
@@ -11,7 +25,7 @@ export default function Register() {
             password: "",
             rePassword: "",
             phone: ""
-        },
+        }, validationSchema,
         onSubmit: (values) => console.log('submit', values)
     })
 
@@ -28,7 +42,9 @@ export default function Register() {
                             id='name'
                             name='name'
                             value={formik.values.name}
-                            onChange={formik.handleChange} />
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.errors.name ? <div className="alert alert-danger">  {formik.errors.name}</div> : ''}
                     </div>
 
 
@@ -39,7 +55,10 @@ export default function Register() {
                             id='userEmail'
                             name='email'
                             value={formik.values.email}
-                            onChange={formik.handleChange} />
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.errors.email ? <div className="alert alert-danger">  {formik.errors.email}</div> : ''}
+
                     </div>
 
 
@@ -50,7 +69,10 @@ export default function Register() {
                             id='userPassword'
                             name='password'
                             value={formik.values.password}
-                            onChange={formik.handleChange} />
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.errors.password ? <div className="alert alert-danger">  {formik.errors.password}</div> : ''}
+
                     </div>
 
 
@@ -61,7 +83,10 @@ export default function Register() {
                             id='RePassword'
                             name='rePassword'
                             value={formik.values.rePassword}
-                            onChange={formik.handleChange} />
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.errors.rePassword ? <div className="alert alert-danger">  {formik.errors.rePassword}</div> : ''}
+
                     </div>
 
 
@@ -72,7 +97,10 @@ export default function Register() {
                             id='phone'
                             name='phone'
                             value={formik.values.phone}
-                            onChange={formik.handleChange} />
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.errors.phone ? <div className="alert alert-danger">  {formik.errors.phone}</div> : ''}
+
                     </div>
 
                     <button className='btn bg-main text-white' type='submit'>Register</button>
