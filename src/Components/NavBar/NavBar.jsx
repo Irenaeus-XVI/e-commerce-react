@@ -1,12 +1,15 @@
 import React from 'react'
 import styles from './NavBar.module.css'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/images/freshcart-logo.svg'
 export default function NavBar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container ">
-                    <Link className="navbar-brand" to={''}>Navbar</Link>
+                    <Link className="navbar-brand" to={''}>
+                        <img src={logo} alt="" />
+                    </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
