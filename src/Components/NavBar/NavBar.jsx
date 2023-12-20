@@ -33,6 +33,34 @@ export default function NavBar() {
 
                         </ul>
 
+
+
+
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+                            <li className="nav-item">
+                                <i className=' fab fa-facebook-f mx-1'></i>
+                                <i className="fa-brands fa-x-twitter mx-1"></i>
+                                <i className=' fab fa-instagram mx-1'></i>
+                                <i className=' fa-brands fa-youtube mx-1'></i>
+                                <i className="fa-brands fa-linkedin mx-1"></i>
+                            </li>
+
+
+
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to={'register'}>Register</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to={'login'}>Login</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to={'login'}>LogOut</Link>
+                            </li>
+
+
+                        </ul>
+
                     </div>
                 </div>
             </nav>
