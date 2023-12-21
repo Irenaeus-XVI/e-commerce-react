@@ -5,10 +5,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.css';
 import App from './App';
+import { TokenContextProvider } from './Context/tokenContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <TokenContextProvider>
+    <App />
+  </TokenContextProvider>
 );
 
