@@ -11,6 +11,7 @@ import LogIn from './Components/LogIn/LogIn'
 import NotFound from './Components/NotFound/NotFound'
 import Brands from './Components/Brands/Brands'
 import TokenContext from './Context/tokenContext'
+import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
 
 export default function App() {
 
@@ -25,11 +26,31 @@ export default function App() {
 
   const routes = createBrowserRouter([{
     path: '', element: <LayOut />, children: [
-      { index: true, element: <Home /> },
-      { path: 'products', element: <Products /> },
-      { path: 'categories', element: <Categories /> },
-      { path: 'cart', element: <Cart /> },
-      { path: 'brands', element: <Brands /> },
+      {
+        index: true, element: <ProtectedRoutes>
+          <Home />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'products', element: <ProtectedRoutes>
+          <Products />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'categories', element: <ProtectedRoutes>
+          <Categories />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'cart', element: <ProtectedRoutes>
+          <Cart />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'brands', element: <ProtectedRoutes>
+          <Brands />
+        </ProtectedRoutes>
+      },
       { path: 'register', element: <Register /> },
       { path: 'login', element: <LogIn /> },
 
