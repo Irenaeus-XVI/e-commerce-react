@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import NavBar from './Components/NavBar/NavBar'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import LayOut from './Components/LayOut/LayOut'
@@ -10,10 +10,18 @@ import Register from './Components/Register/Register'
 import LogIn from './Components/LogIn/LogIn'
 import NotFound from './Components/NotFound/NotFound'
 import Brands from './Components/Brands/Brands'
+import TokenContext from './Context/tokenContext'
 
 export default function App() {
 
+  const { setToken } = useContext(TokenContext)
+  useEffect(() => {
 
+    if (localStorage.getItem('userToken')) {
+      setToken(localStorage.getItem('userToken'))
+    }
+    
+  }, [])
 
   const routes = createBrowserRouter([{
     path: '', element: <LayOut />, children: [
