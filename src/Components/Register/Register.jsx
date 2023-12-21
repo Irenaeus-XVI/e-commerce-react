@@ -125,7 +125,7 @@ export default function Register() {
 
                     {isLoading ? <button className='btn bg-main text-white' type='submit'>
                         <i className='fa fa-spin fa-spinner'></i>
-                    </button> : <button className='btn bg-main text-white' type='submit'>Register</button>}
+                    </button> : <button disabled={!(formik.isValid && formik.dirty)} className='btn bg-main text-white' type='submit'>Register</button>}
 
 
                 </form>
