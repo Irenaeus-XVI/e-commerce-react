@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './LogIn.module.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import TokenContext from '../../Context/tokenContext';
 
 export default function LogIn() {
     const [isLoading, setIsLoading] = useState(false)
     const [apiError, setApiError] = useState('')
     const navigate = useNavigate()
+    const { setToken } = useContext(TokenContext)
+
 
     const signIn = async (values) => {
         setIsLoading(true)
@@ -22,6 +25,8 @@ export default function LogIn() {
         // console.log(data);
         if (data.message == 'success') {
             setIsLoading(false)
+            localStorage.setItem('userToken', data.token)
+            setToken(data.token)
             navigate('/')
         }
     }
