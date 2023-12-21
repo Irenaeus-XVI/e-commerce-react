@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
 import styles from './NavBar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/freshcart-logo.svg'
 import TokenContext from '../../Context/tokenContext'
 export default function NavBar() {
 
 
-    const { token } = useContext(TokenContext)
-    console.log(token);
+    const { token, setToken } = useContext(TokenContext)
+    const navigate = useNavigate()
+
+    const logOut = () => {
+        localStorage.removeItem('userToken');
+        setToken(null);
+        navigate('/login');
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -55,7 +61,7 @@ export default function NavBar() {
 
                             {token ? <>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to={'login'}>LogOut</Link>
+                                    <button className="nav-link active" aria-current="page" onClick={logOut}>LogOut</button>
                                 </li>
                             </> : <>
                                 <li className="nav-item">

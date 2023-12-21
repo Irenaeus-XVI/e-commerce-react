@@ -20,7 +20,7 @@ export default function App() {
     if (localStorage.getItem('userToken')) {
       setToken(localStorage.getItem('userToken'))
     }
-    
+
   }, [])
 
   const routes = createBrowserRouter([{
