@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './NavBar.module.css'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/freshcart-logo.svg'
+import TokenContext from '../../Context/tokenContext'
 export default function NavBar() {
+
+
+    const { token } = useContext(TokenContext)
+    console.log(token);
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -14,7 +19,8 @@ export default function NavBar() {
                         <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        {token ? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" to={''}>Home</Link>
                             </li>
@@ -31,7 +37,7 @@ export default function NavBar() {
                                 <Link className="nav-link" to={'brands'}> Brands</Link>
                             </li>
 
-                        </ul>
+                        </ul> : ''}
 
 
 
@@ -47,16 +53,20 @@ export default function NavBar() {
                             </li>
 
 
+                            {token ? <>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to={'login'}>LogOut</Link>
+                                </li>
+                            </> : <>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to={'register'}>Register</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to={'login'}>Login</Link>
+                                </li>
+                            </>}
 
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to={'register'}>Register</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to={'login'}>Login</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to={'login'}>LogOut</Link>
-                            </li>
+
 
 
                         </ul>
