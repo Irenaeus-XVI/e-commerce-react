@@ -6,12 +6,18 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.css';
 import App from './App';
 import { TokenContextProvider } from './Context/tokenContext';
-
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <TokenContextProvider>
-    <App />
-  </TokenContextProvider>
+  <QueryClientProvider client={queryClient}>
+    <TokenContextProvider>
+      <App />
+    </TokenContextProvider>
+    <ReactQueryDevtools initialIsOpen="false" position='bottom-right' />
+  </QueryClientProvider>
+
 );
 
