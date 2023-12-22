@@ -12,6 +12,7 @@ import NotFound from './Components/NotFound/NotFound'
 import Brands from './Components/Brands/Brands'
 import TokenContext from './Context/tokenContext'
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
+import Details from './Components/Details/Details'
 
 export default function App() {
 
@@ -34,6 +35,11 @@ export default function App() {
       {
         path: 'products', element: <ProtectedRoutes>
           <Products />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'details/:id', element: <ProtectedRoutes>
+          <Details />
         </ProtectedRoutes>
       },
       {
