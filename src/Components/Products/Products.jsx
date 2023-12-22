@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import styles from './Products.module.css'
 import axios from 'axios'
 import { Puff } from 'react-loader-spinner'
+import { useQuery } from 'react-query'
 export default function Products() {
 
-    const [products, setProducts] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
-    async function getProducts() {
-        const { data } = await axios.get('https://ecommerce.routemisr.com/api/v1/products?')
-        console.log(data.data);
-        setProducts(data.data)
-        setIsLoading(false)
+    function getProducts() {
+        return axios.get('https://ecommerce.routemisr.com/api/v1/products')
+
     }
 
+    const { isLoading, data } = useQuery('Products', getProducts)
 
-    useEffect(() => {
-        getProducts()
-    }, [])
     return (
         <>
 
@@ -36,7 +29,7 @@ export default function Products() {
 
                     : <div className="row">
 
-                        {products.map((product) => (
+                        {data?.data.data.map((product) => (
                             <div className="col-md-2 " key={product._id}>
                                 <div className="product px-2 py-2">
 
