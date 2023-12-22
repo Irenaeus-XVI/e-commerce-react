@@ -33,7 +33,7 @@ export default function Products() {
                         wrapperClass=""
                     />
                 </div>
-                
+
                     : <div className="row">
 
                         {products.map((product) => (
