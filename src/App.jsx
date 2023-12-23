@@ -13,7 +13,6 @@ import Brands from './Components/Brands/Brands'
 import TokenContext from './Context/tokenContext'
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
 import Details from './Components/Details/Details'
-
 export default function App() {
 
   const { setToken } = useContext(TokenContext)

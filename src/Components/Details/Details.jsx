@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Details.module.css'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Puff } from 'react-loader-spinner'
 import Slider from "react-slick";
+import { CartContext } from '../../Context/cartContext'
+import toast from 'react-hot-toast';
+
 export default function Details() {
 
     const { id } = useParams()
@@ -21,6 +24,21 @@ export default function Details() {
         setProductDetails(data.data)
     }
 
+    const { addToCart } = useContext(CartContext)
+
+    async function addCart(id) {
+        const data = await addToCart(id)
+        console.log(data.data, 'asd');
+        if (data.data?.status == 'success') {
+            toast.success(data.data?.message, {
+                position: 'top-right',
+            });
+        } else {
+            toast.error(data.response.data.message, {
+                position: 'top-right',
+            });
+        }
+    }
 
     const settings = {
         dots: true,
@@ -48,7 +66,7 @@ export default function Details() {
                         wrapperClass=""
                     />
                 </div> : <div className="row align-items-center">
-                    <div className="col-md-4">
+                    <div className="col-md-4 mb-3">
                         <Slider {...settings}>
                             {productDetails.images.map((img, index) => <img className='w-100' src={img} key={index} />)}
                         </Slider>
@@ -61,7 +79,7 @@ export default function Details() {
                             <h5>{productDetails?.price}</h5>
                             <h5>{productDetails?.ratingsAverage} <i className='fa fa-star rating-color'></i></h5>
                         </div>
-                        <button className='btn bg-main w-100 text-white'>Add To Cart</button>
+                        <button onClick={() => addCart(productDetails._id)} className='btn bg-main w-100 text-white'>Add To Cart</button>
                     </div>
                 </div>}
             </div>

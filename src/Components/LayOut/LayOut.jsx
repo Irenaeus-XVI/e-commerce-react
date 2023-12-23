@@ -3,6 +3,8 @@ import styles from './LayOut.module.css'
 import NavBar from '../NavBar/NavBar'
 import Footer from '../Footer/Footer'
 import { Outlet } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
+
 export default function LayOut() {
     return (
         <>
@@ -10,7 +12,7 @@ export default function LayOut() {
             <div className="container">
                 <div className="row">
                     <Outlet />
-
+                    <Toaster />
                 </div>
             </div>
             <Footer />

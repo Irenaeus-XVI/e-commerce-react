@@ -1,7 +1,12 @@
 import axios from 'axios'
+import { useContext } from 'react'
 import { Puff } from 'react-loader-spinner'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../Context/cartContext'
+import toast from 'react-hot-toast';
+
+
 export default function Products() {
 
 
@@ -11,6 +16,22 @@ export default function Products() {
     }
 
     const { isLoading, data } = useQuery('Products', getProducts)
+    const { addToCart } = useContext(CartContext)
+
+    async function addCart(id) {
+        const { data } = await addToCart(id)
+        console.log(data, 'asd');
+        if (data.status == 'success') {
+            toast.success(data.message, {
+                position: 'top-right',
+            });
+        } else {
+            toast.error(data.message, {
+                position: 'top-right',
+            });
+        }
+    }
+
 
     return (
         <>
@@ -45,7 +66,7 @@ export default function Products() {
                                         </div>
                                     </Link>
 
-                                    <button className='btn bg-main text-white w-100'>Add To Cart</button>
+                                    <button onClick={() => addCart(product._id)} className='btn bg-main text-white w-100'>Add To Cart</button>
                                 </div>
                             </div>
                         ))}
