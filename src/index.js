@@ -10,16 +10,18 @@ import App from './App';
 import { TokenContextProvider } from './Context/tokenContext';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import CartContextProvider from './Context/cartContext';
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <TokenContextProvider>
-      <App />
-    </TokenContextProvider>
-    <ReactQueryDevtools initialIsOpen="false" position='bottom-right' />
-  </QueryClientProvider>
-
+  <CartContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <TokenContextProvider>
+        <App />
+      </TokenContextProvider>
+      <ReactQueryDevtools initialIsOpen="false" position='bottom-right' />
+    </QueryClientProvider>
+  </CartContextProvider>
 );
 
