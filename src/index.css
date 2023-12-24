@@ -63,3 +63,6 @@ i {
     cursor: pointer;
 }
 
+.main-btn{
+    background-color: var(--main-color);
+}
