@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import { CartContext } from '../../Context/cartContext';
 import { Puff } from 'react-loader-spinner';
-
+import { Link } from 'react-router-dom'
 export default function Cart() {
     const { getCart, deleteProductFromCart, updateProductQuantity, deleteUserCart } = useContext(CartContext);
     const [cartDetails, setCartDetails] = useState(null);
@@ -124,7 +124,7 @@ export default function Cart() {
                         <div className='d-flex justify-content-center align-items-center vh-100'>
                             <div className=' text-center'>
                                 <h3>Your Cart Is Empty</h3>
-                                <button className='btn bg-main text-white'>Browse Products List</button>
+                                <Link  to={'/'} className='btn bg-main text-white'>Browse Products List</Link>
                             </div>
                         </div>
                     )}
