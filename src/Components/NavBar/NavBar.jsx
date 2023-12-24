@@ -3,10 +3,12 @@ import styles from './NavBar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/freshcart-logo.svg'
 import TokenContext from '../../Context/tokenContext'
+import { CartContext } from '../../Context/cartContext'
 export default function NavBar() {
 
 
     const { token, setToken } = useContext(TokenContext)
+    const { totalNumberOfElements } = useContext(CartContext)
     const navigate = useNavigate()
 
     const logOut = () => {
@@ -60,6 +62,12 @@ export default function NavBar() {
 
 
                             {token ? <>
+                                <li className="nav-item position-relative">
+                                    <Link className="nav-link" to={'cart'}>
+                                        <i className='fa fa-shopping-cart text-main fa-xl '  ></i>
+                                        <span className='bg-main text-white p-1 rounded position-absolute top-0 end-0'>{totalNumberOfElements}</span>
+                                    </Link>
+                                </li>
                                 <li className="nav-item">
                                     <button className="nav-link active" aria-current="page" onClick={logOut}>LogOut</button>
                                 </li>

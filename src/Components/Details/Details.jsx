@@ -24,7 +24,7 @@ export default function Details() {
         setProductDetails(data.data)
     }
 
-    const { addToCart } = useContext(CartContext)
+    const { addToCart, setTotalNumberOfElements } = useContext(CartContext)
 
     async function addCart(id) {
         const data = await addToCart(id)
@@ -33,6 +33,7 @@ export default function Details() {
             toast.success(data.data?.message, {
                 position: 'top-right',
             });
+            setTotalNumberOfElements(data.data.numOfCartItems)
         } else {
             toast.error(data.response.data.message, {
                 position: 'top-right',

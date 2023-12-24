@@ -33,17 +33,13 @@ export default function CategoriesSlider() {
             <h2>Shop Popular Category</h2>
             <Slider {...settings} className=''>
 
-                {data?.data.data.map((category, index) =>
-                    <>
+                {data?.data.data.map((category) => (
+                    <div key={category._id}>
+                        <img src={category.image} alt="" height={300} className='w-100' />
+                        <h4>{category.title}</h4>
+                    </div>
+                ))}
 
-                        <div key={index}>
-                            <img src={category.image} alt="" height={300} className='w-100' />
-                            <h4>{category.title}</h4>
-                        </div>
-
-
-                    </>
-                )}
             </Slider>
         </>
     )

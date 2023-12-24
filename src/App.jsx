@@ -13,6 +13,8 @@ import Brands from './Components/Brands/Brands'
 import TokenContext from './Context/tokenContext'
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
 import Details from './Components/Details/Details'
+import CheckOut from './Components/CheckOut/CheckOut'
+import AllOrders from './Components/AllOrders/AllOrders'
 export default function App() {
 
   const { setToken } = useContext(TokenContext)
@@ -54,6 +56,16 @@ export default function App() {
       {
         path: 'brands', element: <ProtectedRoutes>
           <Brands />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'checkout', element: <ProtectedRoutes>
+          <CheckOut />
+        </ProtectedRoutes>
+      },
+      {
+        path: 'allorders', element: <ProtectedRoutes>
+          <AllOrders />
         </ProtectedRoutes>
       },
       { path: 'register', element: <Register /> },

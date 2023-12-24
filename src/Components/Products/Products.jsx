@@ -16,7 +16,7 @@ export default function Products() {
     }
 
     const { isLoading, data } = useQuery('Products', getProducts)
-    const { addToCart } = useContext(CartContext)
+    const { addToCart, setTotalNumberOfElements } = useContext(CartContext)
 
     async function addCart(id) {
         const { data } = await addToCart(id)
@@ -25,6 +25,7 @@ export default function Products() {
             toast.success(data.message, {
                 position: 'top-right',
             });
+            setTotalNumberOfElements(data.numOfCartItems)
         } else {
             toast.error(data.message, {
                 position: 'top-right',
