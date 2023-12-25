@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 export default function Cart() {
     const {
         getCart,
+        setCartId,
         deleteProductFromCart,
         updateProductQuantity,
         deleteUserCart,
@@ -20,6 +21,9 @@ export default function Cart() {
             try {
                 const { data } = await getCart();
                 setCartDetails(data);
+                if (data?.data?._id) {
+                    setCartId(data?.data._id);
+                }
                 setTotalNumberOfElements(data?.numOfCartItems);
                 setLoading(false);
             } catch (error) {
@@ -29,7 +33,7 @@ export default function Cart() {
         };
 
         fetchCartDetails();
-    }, [getCart]);
+    }, []);
 
     const removeItem = async (id) => {
         try {
@@ -140,7 +144,7 @@ export default function Cart() {
     const renderEmptyCart = () => (
         <div className='d-flex justify-content-center align-items-center vh-100'>
             <div className=' text-center'>
-                <h3 className=' text-white'>Your Cart Is Empty</h3>
+                <h3 className=' text-whitec'>Your Cart Is Empty</h3>
                 <Link to={'/'} className='btn bg-main text-white'>
                     Browse Products List
                 </Link>

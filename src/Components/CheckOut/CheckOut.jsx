@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styles from './CheckOut.module.css'
 import { useFormik } from 'formik'
 import { CartContext } from '../../Context/cartContext'
 export default function CheckOut() {
 
-    const { onlinePayment } = useContext(CartContext)
+    const { onlinePayment, getInitialCart } = useContext(CartContext)
+
+    // useEffect(() => { getInitialCart() }, [])
     const formik = useFormik({
         initialValues: {
             details: "",
