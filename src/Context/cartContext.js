@@ -66,7 +66,6 @@ export default function CartContextProvider(props) {
             (`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`, {
                 shippingAddress
             },
-
                 {
                     headers
                 }).then((res) => res).catch((err) => err)

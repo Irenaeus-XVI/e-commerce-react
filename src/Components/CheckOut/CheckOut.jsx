@@ -48,7 +48,7 @@ export default function CheckOut() {
                             value={formik.values.city}
                             onChange={formik.handleChange} />
                     </div>
-                    <button className='btn bg-main w-100 text-white'>Pay Now</button>
+                    <button className='btn bg-main w-100 text-white' type='submit'>Pay Now</button>
                 </form>
             </div>
 

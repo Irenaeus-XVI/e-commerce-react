@@ -4,20 +4,25 @@ import TokenContext from '../../Context/tokenContext';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Puff } from 'react-loader-spinner';
+import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom';
 
 export default function AllOrders() {
     const { user } = useContext(TokenContext);
-    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [selectedOrder, setSelectedOrder] = useState();
 
-    const { isLoading, data, error, refetch } = useQuery('UserOrders', getUserOrders, {
-        enabled: false,
+    const { isLoading, data, error } = useQuery('UserOrders', getUserOrders, {
+        enabled: !!user,
     });
 
+    console.log(data);
+
     useEffect(() => {
-        if (user) {
-            refetch();
+        // Set the first order by default when data is available
+        if (data && data.length > 0) {
+            setSelectedOrder(data[0]);
         }
-    }, [user, refetch]);
+    }, [data])
 
     function getUserOrders() {
         return axios.get(`https://ecommerce.routemisr.com/api/v1/orders/user/${user.id}`).then((response) => response.data);
@@ -27,14 +32,25 @@ export default function AllOrders() {
         setSelectedOrder(order);
     };
 
-    console.log(data);
+    const renderEmptyOrder = () => (
+        <div className='d-flex justify-content-center align-items-center vh-100'>
+            <div className=' text-center'>
+                <h3>Your Cart Is Empty</h3>
+                <Link to={'/'} className='btn bg-main text-white'>
+                    Browse Products List
+                </Link>
+            </div>
+        </div>
+    );
 
     return (
         <>
+            <Helmet>
+                <title>My Orders</title>
+            </Helmet>
             <div className="container">
                 <div className="row py-3">
-                    <h1 className=''>All Orders</h1>
-
+                    <h1 className='fw-bold'>All Orders</h1>
                     {isLoading ? (
                         <div className='d-flex justify-content-center '>
                             <Puff
@@ -47,13 +63,15 @@ export default function AllOrders() {
                                 wrapperClass=""
                             />
                         </div>
-                    ) : (
+                    ) : error ? (
+                        <div>Error fetching data. Please try again.</div>
+                    ) : data?.length > 0 ? (
                         <>
                             <div className="col-md-4 ">
-                                {data?.map((order, index) => (
+                                {data?.map((order) => (
                                     <div
-                                        className={`bg-light-subtle  shadow-lg p-3 border my-2`}
-                                        key={index}
+                                        className={`bg-light-subtle rounded shadow-lg p-3 border my-2`}
+                                        key={order.id} // Use a unique identifier as the key
                                         onClick={() => handleOrderClick(order)}
                                     >
                                         <h3 className='fw-bold mb-2'>Order#{order.id}</h3>
@@ -71,8 +89,6 @@ export default function AllOrders() {
                                 ))}
                             </div>
 
-
-
                             <div className="col-md-8 ">
                                 {selectedOrder && (
                                     <>
@@ -83,16 +99,14 @@ export default function AllOrders() {
                                                 <p className='text-main'>{selectedOrder.totalOrderPrice} EGP</p>
                                             </div>
 
-
                                             <div className="rounded p-4 my-2 border">
                                                 <h3 className='fw-bold mb-2'></h3>
                                                 <div className="d-flex justify-content-between">
                                                     <div>
                                                         <p>Delivery Address</p>
-                                                        <p><i class="fa-solid fa-circle-info text-main"></i> {selectedOrder.shippingAddress.details}</p>
+                                                        <p><i className="fa-solid fa-circle-info text-main"></i> {selectedOrder.shippingAddress.details}</p>
                                                         <p><i className="fa-solid fa-city text-main"></i> {selectedOrder.shippingAddress.city}</p>
                                                         <p><i className="fa-solid fa-phone text-main" ></i> {selectedOrder.shippingAddress.phone}</p>
-
                                                     </div>
                                                     <div>
                                                         <p>Payment Method</p>
@@ -104,31 +118,25 @@ export default function AllOrders() {
                                             <p className=' fw-bolder'>Items</p>
                                             <div className="rounded p-4 my-2 border">
                                                 {selectedOrder.cartItems.map((product) => (
-                                                    <>
-                                                        <div className='row py-2 border-bottom' key={product.product._id}>
-                                                            <div className='col-md-1'>
-                                                                <img src={product.product.imageCover} alt='' className='w-100' />
-                                                            </div>
+                                                    <div className='row py-2 border-bottom' key={product.product._id}>
+                                                        <div className='col-md-1'>
+                                                            <img src={product.product.imageCover} alt='' className='w-100' />
+                                                        </div>
 
-                                                            <div className='col-md-11'>
-                                                                <div className='d-flex justify-content-between'>
-                                                                    <div className='left-side'>
-                                                                        <h4>{product.product.title}</h4>
-                                                                        <p className='text-main'>{product.price}EGP</p>
-                                                                    </div>
-
-                                                                    <div className='right-side d-flex justify-content-center align-items-center'>
-
-                                                                        <span className='mx-2'>{product.count}</span>
-
-                                                                    </div>
+                                                        <div className='col-md-11'>
+                                                            <div className='d-flex justify-content-between'>
+                                                                <div className='left-side'>
+                                                                    <h4>{product.product.title}</h4>
+                                                                    <p className='text-main'>{product.price}EGP</p>
                                                                 </div>
 
+                                                                <div className='right-side d-flex justify-content-center align-items-center'>
+                                                                    <span className='mx-2'>{product.count}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </>
+                                                    </div>
                                                 ))}
-
                                             </div>
 
                                             <div className="ms-auto w-50">
@@ -139,16 +147,12 @@ export default function AllOrders() {
                                                 <p className='fw-bold'>Delivery Fees:  <span className='text-main fw-bold'>{selectedOrder.shippingPrice} EGP</span></p>
                                                 <p className='fw-bold h4'>Order Total:  <span className='text-main fw-bold'>{selectedOrder.totalOrderPrice + selectedOrder.shippingPrice + selectedOrder.taxPrice} EGP </span ></p>
                                             </div>
-
-
-
-
                                         </div>
                                     </>
                                 )}
                             </div>
                         </>
-                    )}
+                    ) : renderEmptyOrder()}
                 </div>
             </div>
         </>

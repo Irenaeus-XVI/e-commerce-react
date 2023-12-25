@@ -16,12 +16,14 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CartContextProvider>
+
     <QueryClientProvider client={queryClient}>
       <TokenContextProvider>
         <App />
       </TokenContextProvider>
       <ReactQueryDevtools initialIsOpen="false" position='bottom-right' />
     </QueryClientProvider>
+
   </CartContextProvider>
 );
 

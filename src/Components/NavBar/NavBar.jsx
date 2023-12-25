@@ -4,10 +4,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/freshcart-logo.svg'
 import TokenContext from '../../Context/tokenContext'
 import { CartContext } from '../../Context/cartContext'
+
 export default function NavBar() {
 
 
-    const { token, setToken } = useContext(TokenContext)
+    const { token, setToken, user } = useContext(TokenContext)
     const { totalNumberOfElements } = useContext(CartContext)
     const navigate = useNavigate()
 
@@ -15,6 +16,7 @@ export default function NavBar() {
         localStorage.removeItem('userToken');
         setToken(null);
         navigate('/login');
+
     }
     return (
         <>
@@ -45,12 +47,16 @@ export default function NavBar() {
                                 <Link className="nav-link" to={'brands'}> Brands</Link>
                             </li>
 
+
                         </ul> : ''}
 
 
 
 
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                            {token ? <li className="nav-item ">
+                                <Link className="nav-link " to={'allorders'}> <span className='text-main'><i className="fa-solid fa-list"></i></span>MY ORDERS</Link>
+                            </li> : ""}
 
                             <li className="nav-item">
                                 <i className=' fab fa-facebook-f mx-1'></i>
@@ -69,7 +75,10 @@ export default function NavBar() {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <button className="nav-link active" aria-current="page" onClick={logOut}>LogOut</button>
+                                    <button className="nav-link active me-1 " aria-current="page" onClick={logOut}>LogOut</button>
+                                </li>
+                                <li className="nav-item">
+                                    <span className="  text-main" aria-current="page"><i className="fa-regular fa-user"></i> {user?.name}</span>
                                 </li>
                             </> : <>
                                 <li className="nav-item">
@@ -78,6 +87,7 @@ export default function NavBar() {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to={'login'}>Login</Link>
                                 </li>
+
                             </>}
 
 

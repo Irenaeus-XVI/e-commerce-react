@@ -90,7 +90,7 @@ export default function Register() {
                             className='form-control'
                             id='userPassword'
                             name='password'
-                            value={formik.values.password}
+
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} />
                         {formik.errors.password ? <div className="alert alert-danger">  {formik.errors.password}</div> : ''}
