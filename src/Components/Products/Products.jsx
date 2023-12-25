@@ -56,13 +56,13 @@ export default function Products() {
 
                         {data?.data.data.map((product) => (
                             <div className="col-md-2 " key={product._id}>
-                                <div className="product px-2 py-2">
+                                <div className="product px-2 py-2" >
                                     <Link to={`/details/${product._id}`}>
                                         <img src={product.imageCover} className='w-100' alt="" />
                                         <p className='text-main'>Category</p>
-                                        <h3>{product.title.split(' ').slice(0, 3).join(' ')}</h3>
+                                        <h3 className=' text-white'>{product.title.split(' ').slice(0, 3).join(' ')}</h3>
                                         <div className="d-flex justify-content-between">
-                                            <p>{product.price + 'Egp'}</p>
+                                            <p className=' text-white'>{product.price + 'Egp'}</p>
                                             <p>
                                                 <i className='fa fa-star rating-color'>{product.ratingsAverage}</i>
                                             </p>

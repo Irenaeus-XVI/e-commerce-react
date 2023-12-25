@@ -140,7 +140,7 @@ export default function Cart() {
     const renderEmptyCart = () => (
         <div className='d-flex justify-content-center align-items-center vh-100'>
             <div className=' text-center'>
-                <h3>Your Cart Is Empty</h3>
+                <h3 className=' text-white'>Your Cart Is Empty</h3>
                 <Link to={'/'} className='btn bg-main text-white'>
                     Browse Products List
                 </Link>

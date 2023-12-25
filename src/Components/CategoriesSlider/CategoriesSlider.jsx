@@ -29,7 +29,7 @@ export default function CategoriesSlider() {
 
     return (
         <>
-            <h2>Shop Popular Category</h2>
+            <h2 className=' text-white'>Shop Popular Category</h2>
             <Slider {...settings} className=''>
 
                 {data?.data.data.map((category) => (

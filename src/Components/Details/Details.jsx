@@ -76,8 +76,8 @@ export default function Details() {
                             {productDetails.images.map((img, index) => <img className='w-100' src={img} key={index} />)}
                         </Slider>
                     </div>
-                    <div className="col-md-8">
-                        <h2>{productDetails?.title}</h2>
+                    <div className="col-md-8  text-white">
+                        <h2 className=' text-white'>{productDetails?.title}</h2>
                         <p>{productDetails?.description}</p>
                         <p>{productDetails?.category.name}</p>
                         <div className="d-flex justify-content-between">

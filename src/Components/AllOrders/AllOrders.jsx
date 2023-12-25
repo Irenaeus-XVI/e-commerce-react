@@ -35,7 +35,7 @@ export default function AllOrders() {
     const renderEmptyOrder = () => (
         <div className='d-flex justify-content-center align-items-center vh-100'>
             <div className=' text-center'>
-                <h3>Your Cart Is Empty</h3>
+                <h3 className=' text-white'>You Don't Have Any Orders</h3>
                 <Link to={'/'} className='btn bg-main text-white'>
                     Browse Products List
                 </Link>
@@ -50,7 +50,7 @@ export default function AllOrders() {
             </Helmet>
             <div className="container">
                 <div className="row py-3">
-                    <h1 className='fw-bold'>All Orders</h1>
+                    <h1 className='fw-bold  text-white'>All Orders</h1>
                     {isLoading ? (
                         <div className='d-flex justify-content-center '>
                             <Puff

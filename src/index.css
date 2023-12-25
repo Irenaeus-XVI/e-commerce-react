@@ -11,6 +11,7 @@
 
 body {
     font-family: var(--font-family) !important;
+    background-color: #131722;
 }
 
 .rating-color {

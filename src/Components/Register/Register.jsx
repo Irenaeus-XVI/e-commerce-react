@@ -53,7 +53,7 @@ export default function Register() {
             <Helmet>
                 <title>Register</title>
             </Helmet>
-            <div className="container my-5">
+            <div className="container my-5  text-white">
                 <h2 className='mb-3'>Register Now:</h2>
                 {apiError ? <div className='alert alert-danger'>{apiError}</div> : ''}
                 <form action="" className='w-75 mx-auto' onSubmit={formik.handleSubmit}>
