@@ -15,13 +15,18 @@ import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
 import Details from './Components/Details/Details'
 import CheckOut from './Components/CheckOut/CheckOut'
 import AllOrders from './Components/AllOrders/AllOrders'
+import { jwtDecode } from "jwt-decode";
+
 export default function App() {
 
-  const { setToken } = useContext(TokenContext)
+  const { setToken, setUser } = useContext(TokenContext)
   useEffect(() => {
 
     if (localStorage.getItem('userToken')) {
       setToken(localStorage.getItem('userToken'))
+      const decoded = jwtDecode(localStorage.getItem('userToken'));
+      // console.log(decoded);
+      setUser(decoded)
     }
 
   }, [])

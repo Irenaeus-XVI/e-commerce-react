@@ -76,13 +76,13 @@ export default function CartContextProvider(props) {
     async function getInitialCart() {
         const { data } = await getCart()
         try {
-            console.log(data);
+            // console.log(data);
             if (data) {
                 setTotalNumberOfElements(data.numOfCartItems)
                 setCartId(data.data._id)
             }
         } catch (error) {
-            console.log('asd', error);
+            // console.log('asd', error);
         }
     }
 
