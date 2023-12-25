@@ -59,6 +59,8 @@ export default function CartContextProvider(props) {
     const [cartId, setCartId] = useState(null)
     const [totalNumberOfElements, setTotalNumberOfElements] = useState(null)
 
+
+
     function onlinePayment(shippingAddress) {
         return axios.post
             (`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`, {
@@ -69,13 +71,22 @@ export default function CartContextProvider(props) {
                     headers
                 }).then((res) => res).catch((err) => err)
     }
+
+
     async function getInitialCart() {
         const { data } = await getCart()
-        if (data) {
-            setTotalNumberOfElements(data.numOfCartItems)
-            setCartId(data.data._id)
+        try {
+            console.log(data);
+            if (data) {
+                setTotalNumberOfElements(data.numOfCartItems)
+                setCartId(data.data._id)
+            }
+        } catch (error) {
+            console.log('asd', error);
         }
     }
+
+
     useEffect(() => {
         getInitialCart()
     }, [])

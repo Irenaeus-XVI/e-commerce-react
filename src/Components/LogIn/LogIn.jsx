@@ -5,7 +5,7 @@ import axios from 'axios'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import TokenContext from '../../Context/tokenContext';
-
+import {Helmet} from "react-helmet";
 export default function LogIn() {
     const [isLoading, setIsLoading] = useState(false)
     const [apiError, setApiError] = useState('')
@@ -47,7 +47,9 @@ export default function LogIn() {
 
     return (
         <>
-
+            <Helmet>
+                <title>Log In</title>
+            </Helmet>
             <div className="container my-5">
                 <h2 className='mb-3'>LogIn Now:</h2>
                 {apiError ? <div className='alert alert-danger'>{apiError}</div> : ''}

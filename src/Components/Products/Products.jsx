@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../Context/cartContext'
 import toast from 'react-hot-toast';
-
+import { Helmet } from "react-helmet";
 
 export default function Products() {
 
@@ -21,7 +21,7 @@ export default function Products() {
     async function addCart(id) {
         const { data } = await addToCart(id)
         console.log(data, 'asd');
-        if (data.status == 'success') {
+        if (data?.status == 'success') {
             toast.success(data.message, {
                 position: 'top-right',
             });
@@ -36,7 +36,9 @@ export default function Products() {
 
     return (
         <>
-
+            <Helmet>
+                <title>Products</title>
+            </Helmet>
             <div className="container py-5">
                 {isLoading ? <div className='d-flex justify-content-center'>
                     <Puff

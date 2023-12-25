@@ -3,7 +3,7 @@ import styles from './Cart.module.css';
 import { CartContext } from '../../Context/cartContext';
 import { Puff } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
-
+import { Helmet } from "react-helmet";
 export default function Cart() {
     const {
         getCart,
@@ -24,7 +24,7 @@ export default function Cart() {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                // console.error('Error fetching cart details:', error);
+                console.error('Error fetching cart details:', error);
             }
         };
 
@@ -148,5 +148,10 @@ export default function Cart() {
         </div>
     );
 
-    return <>{loading ? renderLoader() : cartDetails && cartDetails.data ? renderCartContent() : renderEmptyCart()}</>;
+    return <>
+        <Helmet>
+            <title>Cart</title>
+        </Helmet>
+
+        {loading ? renderLoader() : cartDetails && cartDetails.data ? renderCartContent() : renderEmptyCart()}</>;
 }

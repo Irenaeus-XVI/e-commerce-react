@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+import { Helmet } from "react-helmet";
 
 export default function Register() {
 
@@ -50,7 +50,9 @@ export default function Register() {
 
     return (
         <>
-
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
             <div className="container my-5">
                 <h2 className='mb-3'>Register Now:</h2>
                 {apiError ? <div className='alert alert-danger'>{apiError}</div> : ''}

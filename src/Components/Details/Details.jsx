@@ -7,7 +7,7 @@ import { Puff } from 'react-loader-spinner'
 import Slider from "react-slick";
 import { CartContext } from '../../Context/cartContext'
 import toast from 'react-hot-toast';
-
+import { Helmet } from "react-helmet";
 export default function Details() {
 
     const { id } = useParams()
@@ -55,6 +55,10 @@ export default function Details() {
 
     return (
         <>
+
+            <Helmet>
+                <title>{productDetails.title}</title>
+            </Helmet>
             <div className="container">
                 {isLoading ? <div className='d-flex justify-content-center'>
                     <Puff
